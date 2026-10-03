@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#c0392b">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Caraiman">
+  <title>Bucegi Offline Map</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-180.png">
+  <link rel="stylesheet" href="lib/maplibre-gl.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <div id="map"></div>
+  <aside id="panel"></aside>
+  <div id="offline-status" class="offline-status" hidden></div>
+  <div id="loading">
+    <h1>Bucegi offline map</h1>
+    <div class="bar"><div></div></div>
+    <div class="label">Starting…</div>
+  </div>
+  <script>
+    /* Inline on purpose: it still runs when the page's other files cannot be loaded, which is what
+       happens when a phone opens index.html straight from a file manager. */
+    setTimeout(function () {
+      if (window.OM && OM.App) return;
+      var label = document.querySelector("#loading .label");
+      if (label) label.innerHTML = "The map's files could not be loaded.<br>On a phone, don't open this file directly: " +
+        "install the map from its web address once (see README), then use the home-screen icon offline.";
+    }, 6000);
+  </script>
+
+  <script src="lib/maplibre-gl.js"></script>
+  <script src="lib/pmtiles.js"></script>
+  <script src="lib/basemaps.js"></script>
+  <script src="lib/maplibre-contour.js"></script>
+  <script src="data/manifest.js"></script>
+  <script src="js/offline-data.js"></script>
+  <script src="js/offline-install.js"></script>
+  <script src="js/tile-sources.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/layers.js"></script>
+  <script src="js/time-model.js"></script>
+  <script src="js/network.js"></script>
+  <script src="js/ui-common.js"></script>
+  <script src="js/ui-tracks.js"></script>
+  <script src="js/ui-calculator.js"></script>
+  <script src="js/ui-layers.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

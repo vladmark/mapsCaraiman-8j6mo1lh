@@ -1,0 +1,111 @@
+:root {
+  --bg: #ffffff;
+  --fg: #1d232a;
+  --muted: #66707a;
+  --line: #e2e5e9;
+  --accent: #c0392b;
+  --panel-w: 400px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+html, body { margin: 0; height: 100%; background: #e9e5dc; color: var(--fg); }
+#map { position: absolute; inset: 0; }
+
+/* ------------------------------------------------------------ side panel */
+#panel {
+  position: absolute; top: 10px; right: 10px; bottom: 34px; width: var(--panel-w);
+  background: var(--bg); border-radius: 10px; box-shadow: 0 4px 18px rgba(0,0,0,.18);
+  display: flex; flex-direction: column; overflow: hidden; z-index: 2; font-size: 13px;
+}
+#panel.collapsed { bottom: auto; width: auto; }
+#panel.collapsed .tabs, #panel.collapsed .tab-content { display: none; }
+.collapse-btn { position: absolute; top: 6px; right: 6px; border: 0; background: transparent; font-size: 18px; cursor: pointer; z-index: 1; }
+#panel.collapsed .collapse-btn { position: static; padding: 8px 12px; }
+.tabs { display: flex; border-bottom: 1px solid var(--line); padding-right: 34px; }
+.tab { flex: 1; border: 0; background: transparent; padding: 11px 6px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 3px solid transparent; font-size: 13px; }
+.tab.active { color: var(--fg); border-bottom-color: var(--accent); }
+.tab-content { overflow-y: auto; flex: 1; }
+.panel-body { padding: 12px 14px 20px; }
+
+h3 { margin: 4px 0 2px; font-size: 15px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+h4 { margin: 14px 0 6px; font-size: 13px; }
+.hint { color: var(--muted); font-size: 11.5px; margin-top: 3px; }
+.note { color: #4b5560; font-size: 12px; background: #f6f4ef; border-radius: 6px; padding: 7px 9px; }
+.warn { color: #a93226; font-weight: 600; }
+.marking { color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.summary { margin: 6px 0; }
+.track-card { border-bottom: 1px solid var(--line); padding: 10px 0 14px; }
+.track-card a { font-size: 12px; color: #1f5fd1; }
+
+.swatch { display: inline-block; width: 26px; height: 5px; border-radius: 3px; background: var(--c); flex: none; }
+.swatch.dashed { background: repeating-linear-gradient(90deg, var(--c) 0 7px, transparent 7px 11px); }
+
+button.small { border: 1px solid var(--line); background: #f7f7f8; border-radius: 6px; padding: 4px 9px; cursor: pointer; font-size: 12px; }
+button.small:hover { background: #eceef1; }
+.row { display: flex; gap: 6px; margin: 8px 0; }
+label.check { display: flex; align-items: center; gap: 4px; margin: 7px 0; cursor: pointer; }
+
+/* --------------------------------------------------------------- stages */
+table.stages { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }
+.stages th { text-align: left; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); padding: 3px 3px; }
+.stages td { padding: 5px 3px; border-bottom: 1px solid #f0f1f3; vertical-align: top; white-space: nowrap; }
+.stages td:first-child { white-space: normal; }
+.stages tr.stage { cursor: pointer; }
+.stages tr.stage:hover { background: #fbf6ec; }
+.stages .to { color: var(--muted); }
+.stages .up { color: #a93226; }
+.stages .down { color: #1f5fd1; }
+.stages .time { font-weight: 700; }
+.stages .cum { color: var(--muted); }
+
+/* -------------------------------------------------------------- profile */
+.profile { position: relative; margin: 6px 0; }
+.profile svg { width: 100%; height: 130px; display: block; }
+.profile .grid { stroke: #eceef0; stroke-width: 1; }
+.profile .axis { font-size: 9px; fill: var(--muted); }
+.profile .mark { stroke: #999; stroke-dasharray: 2 2; stroke-width: 1; }
+.profile .cursor { stroke: #111; stroke-width: 1; }
+.profile-readout { position: absolute; top: 2px; right: 6px; font-size: 11px; font-weight: 600; }
+.hover-dot { width: 14px; height: 14px; border-radius: 50%; background: #111; border: 3px solid #fff; box-shadow: 0 0 4px rgba(0,0,0,.5); }
+
+/* ----------------------------------------------------------- calculator */
+.pace { background: #f6f4ef; border-radius: 8px; padding: 8px 10px; margin-bottom: 8px; }
+.pace label { font-weight: 600; display: flex; justify-content: space-between; }
+.pace input { width: 100%; }
+.endpoint { display: flex; align-items: center; gap: 6px; margin: 6px 0; }
+.endpoint input { flex: 1; min-width: 0; padding: 6px 8px; border: 1px solid #cfd4da; border-radius: 6px; font-size: 13px; }
+.badge { width: 22px; height: 22px; border-radius: 50%; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 12px; flex: none; }
+.endpoint-A .badge { background: #1a9641; }
+.endpoint-B .badge { background: #d7191c; }
+.status { margin: 4px 0 8px; }
+.big-time { font-size: 30px; font-weight: 800; margin-top: 6px; }
+.via { font-size: 12px; margin: 6px 0; line-height: 1.45; }
+.via ul { margin: 2px 0 0; padding-left: 18px; }
+
+/* --------------------------------------------------------------- legend */
+.legend-row { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+canvas.waymark { width: 16px; height: 16px; }
+.credits { margin-top: 16px; }
+.popup b { display: block; margin-bottom: 2px; }
+
+/* -------------------------------------------------------------- loading */
+#loading { position: absolute; inset: 0; background: #f3f1ec; display: grid; place-content: center; text-align: center; z-index: 10; }
+#loading h1 { font-size: 22px; margin: 0 0 14px; }
+#loading .bar { width: 280px; height: 8px; background: #ddd; border-radius: 4px; overflow: hidden; }
+#loading .bar > div { width: 0; height: 100%; background: var(--accent); transition: width .2s; }
+#loading .label { margin-top: 10px; color: var(--muted); font-size: 13px; }
+
+/* ------------------------------------------------------- offline status */
+.offline-status { position: absolute; top: 10px; left: 56px; z-index: 3; padding: 6px 10px; border-radius: 16px;
+  font-size: 12.5px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,.2); max-width: calc(100% - 520px); transition: opacity 1s; }
+.offline-status.ok { background: #e3f4e8; color: #1e7a3c; }
+.offline-status.warn { background: #fdecea; color: #a93226; }
+.offline-status.faded { opacity: 0.35; }
+
+/* --------------------------------------------------------------- mobile */
+@media (max-width: 700px) {
+  .offline-status { max-width: calc(100% - 70px); }
+  .endpoint input { font-size: 16px; }  /* stops iOS zooming in when the field is focused */
+  #panel { top: auto; left: 8px; right: 8px; width: auto; bottom: 28px; max-height: 48vh; }
+  #panel.collapsed { left: auto; }
+}
